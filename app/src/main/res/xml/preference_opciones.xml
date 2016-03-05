@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <PreferenceCategory
+        android:title="Conexion Servidor">
+            <EditTextPreference
+            android:key="ipServidor"
+            android:title="IP"
+            android:summary="Dirección de la IP del servidor"
+            android:dialogTitle="Para modificar la IP, introduzca el nuevo valor:" />
+        <EditTextPreference
+            android:key="puertoServidor"
+            android:title="puerto"
+            android:summary="puerto del servidor"
+            android:dialogTitle="Para modificar el puerto, introduzca el nuevo valor:" />
+        <EditTextPreference
+            android:key="nombreSW"
+            android:title="Servicio Web"
+            android:summary="Nombre del servicio web"
+            android:dialogTitle="Para modificar el nombre del servicio web, introduzca el nuevo valor:" />
+        <EditTextPreference
+            android:key="nameSpaceSW"
+            android:title="Namespace"
+            android:summary="Namespace del Servicio Web"
+            android:dialogTitle="Para modificar el namespace, introduzca el nuevo valor:" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Login">
+        <EditTextPreference
+            android:key="usuario"
+            android:title="Usuario"
+            android:summary="Valor"
+            android:dialogTitle="Introduzca usuario" />
+        <EditTextPreference
+            android:key="pass"
+            android:title="Contraseña"
+            android:summary="Configuración de la contraseña"
+            android:dialogTitle="Introduce la contraseña" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
