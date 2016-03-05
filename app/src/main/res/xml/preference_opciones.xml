@@ -8,36 +8,67 @@
             <EditTextPreference
             android:key="ipServidor"
             android:title="IP"
+            android:defaultValue="192.168.1.36"
             android:summary="Dirección de la IP del servidor"
             android:dialogTitle="Para modificar la IP, introduzca el nuevo valor:" />
         <EditTextPreference
             android:key="puertoServidor"
             android:title="puerto"
+            android:defaultValue="9090"
             android:summary="puerto del servidor"
             android:dialogTitle="Para modificar el puerto, introduzca el nuevo valor:" />
         <EditTextPreference
             android:key="nombreSW"
             android:title="Servicio Web"
+            android:defaultValue="frasesCelebresWS?wsdl"
             android:summary="Nombre del servicio web"
             android:dialogTitle="Para modificar el nombre del servicio web, introduzca el nuevo valor:" />
         <EditTextPreference
             android:key="nameSpaceSW"
             android:title="Namespace"
+            android:defaultValue="http://frasescelebresws.germangascon.com/"
             android:summary="Namespace del Servicio Web"
             android:dialogTitle="Para modificar el namespace, introduzca el nuevo valor:" />
     </PreferenceCategory>
+
     <PreferenceCategory
         android:title="Login">
-        <EditTextPreference
-            android:key="usuario"
-            android:title="Usuario"
-            android:summary="Valor"
-            android:dialogTitle="Introduzca usuario" />
-        <EditTextPreference
-            android:key="pass"
-            android:title="Contraseña"
-            android:summary="Configuración de la contraseña"
-            android:dialogTitle="Introduce la contraseña" />
+        <ListPreference
+            android:key="log"
+            android:title="Tipo de Acesso"
+            android:entries="@array/acceso"
+            android:defaultValue="con"
+            android:entryValues="@array/opciones"
+            />
+
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Alarma de Fecha célebre"
+        android:summary="Configuración de la hora de la Frase Célebre"
+        >
+
+        <ListPreference
+            android:key="hora"
+            android:title="Hora"
+            android:entries="@array/hora"
+            android:defaultValue="12"
+            android:dialogTitle="Cambie la hora"
+            android:entryValues="@array/digito_hora"
+            />
+
+        <ListPreference
+            android:key="min"
+            android:title="Minutos"
+            android:entries="@array/minuto"
+            android:defaultValue="00"
+            android:dialogTitle="Cambie los minutos"
+            android:entryValues="@array/digito_min"
+            />
+        <EditTextPreference
+            android:key="hora_min"
+            android:title="Hora de frase célebre"
+            android:summary="Configuración de la hora de la Frase Célebre"
+            android:dialogTitle="Cambie la hora" />
+        </PreferenceCategory>
 
 </PreferenceScreen>

@@ -1,31 +1,26 @@
 package com.germangascon.frasescelebres;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.germangascon.frasescelebres.interfaces.JsonResult;
-import com.germangascon.frasescelebres.soap.FrasesCelebresTask;
+import com.germangascon.frasescelebres.Setting.SettingsActivity;
 import com.germangascon.frasescelebres.soap.SoapMethod;
-import com.germangascon.frasescelebres.soap.SoapParam;
+import com.germangascon.frasescelebres.activities.ContenidoActivity;
+import com.germangascon.frasescelebres.activities.ListadoAutoresActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
-public class MainActivity extends AppCompatActivity implements JsonResult {
+public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
-    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,97 +38,44 @@ public class MainActivity extends AppCompatActivity implements JsonResult {
             }
         });
 
-        textView = (TextView) findViewById(R.id.textView);
+        final TextView textView = (TextView) findViewById(R.id.textView);
 
-        Button btSoapQuery = (Button) findViewById(R.id.btSoapQuery);
-        btSoapQuery.setOnClickListener(new View.OnClickListener() {
+        Button fraseDelDia=(Button)findViewById(R.id.button1);
+        Button frasesPorAutor=(Button)findViewById(R.id.button2);
+        Button frasesPorCategoria=(Button)findViewById(R.id.button3);
+
+        fraseDelDia.setText("Frase del día");
+        frasesPorAutor.setText("Frases por autor");
+        frasesPorCategoria.setText("Frases por Categoría");
+
+        fraseDelDia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FrasesCelebresTask task = new FrasesCelebresTask(MainActivity.this);
 
-                /** Ejemplos de uso */
-                /** IMPORTANTE: NO olvidar la llamada final a task.execute(soapParam) **/
+                Intent i = new Intent(MainActivity.this, ContenidoActivity.class);
+                i.putExtra("method", SoapMethod.GET_FRASE_DEL_DIA);
+                startActivity(i);
 
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_FRASE_DEL_DIA);
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_FRASES_BY_AUTOR);
-                soapParam.addParam("idAutor", "2");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_FRASES_BY_CATEGORIA);
-                soapParam.addParam("idCategoria", "1");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_AUTOR);
-                soapParam.addParam("id", "1");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_CATEGORIA);
-                soapParam.addParam("id", "1");
-                */
-
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.ADD_CATEGORIA);
-                soapParam.addParam("nombre", "Inteligencia");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.ADD_AUTOR);
-                soapParam.addParam("nombre", "Aristóteles");
-                soapParam.addParam("nacimiento", "-384");
-                soapParam.addParam("muerte", "-322");
-                soapParam.addParam("profesion", "Filósofo griego");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.ADD_FRASE);
-                soapParam.addParam("idCategoria", "3");
-                soapParam.addParam("idAutor", "3");
-                soapParam.addParam("texto", "La inteligencia consiste no sólo en el conocimiento, sino también en la destreza de aplicar los conocimientos en la práctica.");
-                soapParam.addParam("fechaProgramada", "");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_LIST_AUTORES);
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.MODIFY_AUTOR);
-                soapParam.addParam("id", "3");
-                soapParam.addParam("nombre", "Aristóteles");
-                soapParam.addParam("nacimiento", "-384");
-                soapParam.addParam("muerte", "-322");
-                soapParam.addParam("profesion", "Filósofo griego");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.MODIFY_CATEGORIA);
-                soapParam.addParam("id", "3");
-                soapParam.addParam("nombre", "Inteligencia");
-                */
-
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.MODIFY_FRASE);
-                soapParam.addParam("id", "5");
-                soapParam.addParam("idCategoria", "3");
-                soapParam.addParam("idAutor", "3");
-                soapParam.addParam("texto", "La inteligencia consiste no sólo en el conocimiento, sino también en la destreza de aplicar los conocimientos en la práctica.");
-                soapParam.addParam("fechaProgramada", "");
-                */
-
-                /*
-                SoapParam soapParam = new SoapParam(SoapMethod.GET_LIST_CATEGORIAS);
-                */
-
-                task.execute(soapParam);
             }
+
+
         });
+
+        frasesPorAutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MainActivity.this, ListadoAutoresActivity.class);
+                i.putExtra("method", SoapMethod.GET_LIST_AUTORES);
+                startActivity(i);
+
+            }
+
+
+        });
+
+
+
     }
 
     @Override
@@ -152,12 +94,15 @@ public class MainActivity extends AppCompatActivity implements JsonResult {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+}
 
+    /*
     @Override
     public void onJsonResult(String method, String json) {
         JSONObject jsonObject;
@@ -262,4 +207,7 @@ public class MainActivity extends AppCompatActivity implements JsonResult {
             }
         }
     }
-}
+
+    */
+
+

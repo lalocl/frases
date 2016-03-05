@@ -1,10 +1,13 @@
 package com.germangascon.frasescelebres.soap;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.germangascon.frasescelebres.interfaces.JsonResult;
+import com.germangascon.frasescelebres.interfaces.Resultado;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,16 +38,32 @@ public class FrasesCelebresTask extends AsyncTask<SoapParam, String, String> {
     private final static String TAG = "FrasesCelebresTask";
     private TextView textView;
     private String method;
-    private JsonResult jsonResult;
+    private Resultado resultado;
+    private SharedPreferences prefs;
 
-    public FrasesCelebresTask(JsonResult jsonResult) {
-        this.jsonResult = jsonResult;
+
+    public FrasesCelebresTask(Resultado resultado,SharedPreferences prefs) {
+        this.resultado = resultado;
+        this.prefs=prefs;
+
     }
 
     @Override
     protected String doInBackground(SoapParam... params) {
-        String url = "http://192.168.1.36:9090/frasesCelebresWS?wsdl";
-        String namespace = "http://frasescelebresws.germangascon.com/";
+
+
+
+        String ip= prefs.getString("ipServidor","192.168.1.36");
+        String puerto= prefs.getString("puertoServidor","9090");
+        String servicioWeb= prefs.getString("nombreSW","frasesCelebresWS?wsdl");
+        String namespace=prefs.getString("nameSpaceSW","http://frasescelebresws.germangascon.com/");
+
+
+
+        String url = "http://" +ip + ":"+puerto+"/"+servicioWeb;
+
+       // String url = "http://192.168.1.36:9090/frasesCelebresWS?wsdl";
+       // String namespace = "http://frasescelebresws.germangascon.com/";
         String result = null;
         method = "getFraseDelDia";
         Map parametros = new HashMap<String, String>();
@@ -71,6 +90,6 @@ public class FrasesCelebresTask extends AsyncTask<SoapParam, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        jsonResult.onJsonResult(method, s);
+        resultado.onResult(s);
     }
 }
