@@ -23,6 +23,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/inicio"/>
+    <include layout="@layout/pruebas_adm"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

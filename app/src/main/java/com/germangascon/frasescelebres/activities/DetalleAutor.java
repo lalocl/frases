@@ -25,7 +25,7 @@ public class DetalleAutor extends ActionBarActivity implements View.OnClickListe
 
         textViewAutor = (TextView) findViewById(R.id.textNombreAutor);
         textViewNacimiento = (TextView) findViewById(R.id.textNacimiento);
-        textViewMuerte = (TextView) findViewById(R.id.textMuerte);
+        textViewMuerte = (TextView) findViewById(R.id.textCategoria);
         textViewProfesion = (TextView) findViewById(R.id.textProfesion);
 
         autor_Id=0;

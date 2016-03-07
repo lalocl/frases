@@ -28,6 +28,11 @@
         </activity>
 
         <activity
+            android:name=".activities.InsertarActivity"
+            android:label="Contenido">
+        </activity>
+
+        <activity
             android:name=".activities.ListadoAutoresActivity"
             android:label="ListaAutores">
         </activity>

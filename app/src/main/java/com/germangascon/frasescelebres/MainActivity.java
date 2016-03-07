@@ -1,11 +1,14 @@
 package com.germangascon.frasescelebres;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.germangascon.frasescelebres.Setting.SettingsActivity;
+import com.germangascon.frasescelebres.activities.InsertarActivity;
 import com.germangascon.frasescelebres.soap.SoapMethod;
 import com.germangascon.frasescelebres.activities.ContenidoActivity;
 import com.germangascon.frasescelebres.activities.ListadoAutoresActivity;
@@ -21,6 +25,7 @@ import com.germangascon.frasescelebres.activities.ListadoAutoresActivity;
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -38,45 +48,79 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final TextView textView = (TextView) findViewById(R.id.textView);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String tipoAcceso= prefs.getString("log","con");
+        Log.d(TAG, tipoAcceso);
 
-        Button fraseDelDia=(Button)findViewById(R.id.button1);
-        Button frasesPorAutor=(Button)findViewById(R.id.button2);
-        Button frasesPorCategoria=(Button)findViewById(R.id.button3);
+        /*
 
-        fraseDelDia.setText("Frase del día");
-        frasesPorAutor.setText("Frases por autor");
-        frasesPorCategoria.setText("Frases por Categoría");
+        if(tipoAcceso.equalsIgnoreCase("adm")) {
+        }else {
 
-        fraseDelDia.setOnClickListener(new View.OnClickListener() {
+        */
+
+            final TextView textView = (TextView) findViewById(R.id.textNombre);
+
+            Button fraseDelDia = (Button) findViewById(R.id.button1);
+            Button frasesPorAutor = (Button) findViewById(R.id.button2);
+            Button frasesPorCategoria = (Button) findViewById(R.id.button3);
+
+            Button insertar = (Button) findViewById(R.id.insertar);
+            Button modificar = (Button) findViewById(R.id.modificar);
+
+            fraseDelDia.setText("Frase del día");
+            frasesPorAutor.setText("Frases por autor");
+            frasesPorCategoria.setText("Frases por Categoría");
+
+            fraseDelDia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(MainActivity.this, ContenidoActivity.class);
+                    i.putExtra("method", SoapMethod.GET_FRASE_DEL_DIA);
+                    startActivity(i);
+
+                }
+
+
+            });
+
+            frasesPorAutor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(MainActivity.this, ListadoAutoresActivity.class);
+                    i.putExtra("method", SoapMethod.GET_LIST_AUTORES);
+                    startActivity(i);
+
+                }
+
+
+            });
+
+        insertar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(MainActivity.this, ContenidoActivity.class);
-                i.putExtra("method", SoapMethod.GET_FRASE_DEL_DIA);
+                Intent i = new Intent(MainActivity.this, InsertarActivity.class);
+                i.putExtra("method", SoapMethod.ADD_AUTOR);
                 startActivity(i);
 
             }
 
 
         });
-
-        frasesPorAutor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(MainActivity.this, ListadoAutoresActivity.class);
-                i.putExtra("method", SoapMethod.GET_LIST_AUTORES);
-                startActivity(i);
-
-            }
+      /*
+        }
+            */
 
 
-        });
+       }
 
 
 
-    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

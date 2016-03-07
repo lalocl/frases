@@ -38,8 +38,21 @@
             android:title="Tipo de Acesso"
             android:entries="@array/acceso"
             android:defaultValue="con"
+            android:summary="En caso de acceder con el perfil de Administrador es necesario validar usuario y contraseña"
             android:entryValues="@array/opciones"
             />
+        <EditTextPreference
+            android:key="Usuario"
+            android:title="Usuario"
+            android:defaultValue=""
+            android:summary="Nombre del servicio web"
+            android:dialogTitle="Para modificar el nombre del servicio web, introduzca el nuevo valor:" />
+        <EditTextPreference
+            android:key="Pass"
+            android:title="Contraseña"
+            android:defaultValue=""
+            android:summary="Namespace del Servicio Web"
+            android:dialogTitle="Para modificar el namespace, introduzca el nuevo valor:" />
 
     </PreferenceCategory>
     <PreferenceCategory

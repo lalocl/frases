@@ -40,7 +40,7 @@ public class ListaAutoresAdaptador extends ArrayAdapter<Autor> {
 
             viewHolder.textViewAutor = (TextView) autor.findViewById(R.id.textNombreAutor);
             viewHolder.textViewNacimiento = (TextView) autor.findViewById(R.id.textNacimiento);
-            viewHolder.textViewMuerte = (TextView) autor.findViewById(R.id.textMuerte);
+            viewHolder.textViewMuerte = (TextView) autor.findViewById(R.id.textCategoria);
             viewHolder.textViewProfesion = (TextView) autor.findViewById(R.id.textProfesion);
             viewHolder.autor_Id = (TextView) autor.findViewById(R.id.autor_Id);
 

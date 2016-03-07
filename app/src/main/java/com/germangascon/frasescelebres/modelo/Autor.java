@@ -8,6 +8,7 @@ public class Autor {
    private String nombre;
    private int nacimiento;
    private int muerte;
+    private String profesion;
 
     public int getIdAutor() {
         return idAutor;
@@ -49,7 +50,7 @@ public class Autor {
         this.profesion = profesion;
     }
 
-    private String profesion;
+
 
     public Autor(int idAutor, String nombre, int nacimiento, int muerte, String profesion) {
 

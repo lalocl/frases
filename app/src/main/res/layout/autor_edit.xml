@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="dam.iesn1.com.sqlitedb.StudentDetail$PlaceholderFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:id="@+id/textNombre"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Año de Nacimiento"
+        android:id="@+id/textNacimiento"
+        android:layout_below="@+id/textNombre"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Año de su muerte"
+        android:id="@+id/textCategoria"
+        android:layout_below="@+id/textNacimiento"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profesión:"
+        android:id="@+id/textProfesion"
+        android:layout_below="@+id/textCategoria"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editNombre"
+        android:layout_above="@+id/textNacimiento"
+        android:layout_toRightOf="@+id/textNombre"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editNacimiento"
+        android:layout_above="@+id/textCategoria"
+        android:layout_toRightOf="@+id/textNombre"
+        android:layout_alignRight="@+id/editNombre"
+        android:layout_alignEnd="@+id/editNombre" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editMuerte"
+        android:text=""
+        android:layout_alignBottom="@+id/textCategoria"
+        android:layout_alignLeft="@+id/editNacimiento"
+        android:layout_alignStart="@+id/editNacimiento"
+        android:layout_alignRight="@+id/editNacimiento"
+        android:layout_alignEnd="@+id/editNacimiento" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/editProfesion"
+        android:text=""
+        android:layout_alignBottom="@+id/textProfesion"
+        android:layout_alignLeft="@+id/editNacimiento"
+        android:layout_alignStart="@+id/editNacimiento"
+        android:layout_alignRight="@+id/editNacimiento"
+        android:layout_alignEnd="@+id/editNacimiento" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:id="@+id/btnSave"
+        android:layout_alignParentBottom="true"
+        />
+
+
+
+
+
+</RelativeLayout>

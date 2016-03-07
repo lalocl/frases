@@ -47,7 +47,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Muerte"
             android:layout_marginLeft="20dp"
-            android:id="@+id/textMuerte" />
+            android:id="@+id/textCategoria" />
     </LinearLayout>
 
 </LinearLayout>

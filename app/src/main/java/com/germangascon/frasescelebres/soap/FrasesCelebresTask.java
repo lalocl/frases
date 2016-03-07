@@ -65,7 +65,7 @@ public class FrasesCelebresTask extends AsyncTask<SoapParam, String, String> {
        // String url = "http://192.168.1.36:9090/frasesCelebresWS?wsdl";
        // String namespace = "http://frasescelebresws.germangascon.com/";
         String result = null;
-        method = "getFraseDelDia";
+       // method = "getFraseDelDia";
         Map parametros = new HashMap<String, String>();
         SoapRequest sr = new SoapRequest(url, namespace);
 

@@ -72,7 +72,7 @@ public class ContenidoActivity extends Activity implements Resultado {
     @Override
     public void onResult(String s) {
 
-        final TextView textView = (TextView) findViewById(R.id.textView);
+        final TextView textView = (TextView) findViewById(R.id.textNombre);
         JSONObject json;
         try {
         json = (JSONObject) new JSONTokener(s).nextValue();
