@@ -45,14 +45,14 @@
             android:key="Usuario"
             android:title="Usuario"
             android:defaultValue=""
-            android:summary="Nombre del servicio web"
-            android:dialogTitle="Para modificar el nombre del servicio web, introduzca el nuevo valor:" />
+            android:summary="Usuario para acceder al menú de administrador"
+            android:dialogTitle="Escriba Usuario válido:" />
         <EditTextPreference
             android:key="Pass"
             android:title="Contraseña"
             android:defaultValue=""
-            android:summary="Namespace del Servicio Web"
-            android:dialogTitle="Para modificar el namespace, introduzca el nuevo valor:" />
+            android:summary="Contraseña del Administrador"
+            android:dialogTitle="Escriba Contraseña:" />
 
     </PreferenceCategory>
     <PreferenceCategory

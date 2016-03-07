@@ -39,18 +39,31 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String tipoAcceso=prefs.getString("log","con");
+                String usu=prefs.getString("Usuario", "");
+                String pass=prefs.getString("Pass", "");
+
+                if(tipoAcceso.equalsIgnoreCase("adm")&&(usu.equals("frase")&& pass.equals("frase"))) {
+                    Snackbar.make(view, "Ole, puedes editar", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else{
+
+                    Snackbar.make(view, "Necesita permiso de administrador. Cambie la configuración en Settings", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }
             }
         });
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String tipoAcceso= prefs.getString("log","con");
-        Log.d(TAG, tipoAcceso);
 
         /*
 
