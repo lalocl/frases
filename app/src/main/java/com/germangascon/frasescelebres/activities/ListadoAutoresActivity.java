@@ -1,12 +1,15 @@
 package com.germangascon.frasescelebres.activities;
 
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,7 +33,7 @@ import java.util.ArrayList;
  */
 public class ListadoAutoresActivity extends ListActivity implements Resultado {
 
-    private final static String TAG = "ContenidoActivity";
+    private final static String TAG = "ListadoAutoresActivity";
     private String method;
     private ListView lista;
     TextView textViewAutor;
@@ -57,7 +60,9 @@ public class ListadoAutoresActivity extends ListActivity implements Resultado {
         FrasesCelebresTask task = new FrasesCelebresTask(this,prefs);
 
         // Le pasamos por parámetro el método que ha de ejecutar
-        SoapParam soapParam = new SoapParam(SoapMethod.GET_LIST_AUTORES);
+
+        SoapParam soapParam = new SoapParam(method);
+       // SoapParam soapParam = new SoapParam(method);
 
         task.execute(soapParam);
 
@@ -92,8 +97,7 @@ public class ListadoAutoresActivity extends ListActivity implements Resultado {
         Log.d(TAG, s);
       ArrayList<Autor> autores = new ArrayList<Autor>();
 
-      /*  ArrayList<HashMap<String,String>> autores= new ArrayList<HashMap<String,String>>();
-        HashMap<String,String>autor = new HashMap<String,String>();*/
+
 
 
         JSONArray jsonArray;
@@ -111,22 +115,7 @@ public class ListadoAutoresActivity extends ListActivity implements Resultado {
                 int nacimiento=Integer.parseInt((String)json.getString("nacimiento"));
                 int muerte=Integer.parseInt((String)json.getString("muerte"));
                 String profesion=(String)json.getString("profesion");
-            /*
-                String id=(String)json.getString("id");
-                String nombre=(String)json.getString("nombre");
-                String nacimiento=(String)json.getString("nacimiento");
-                String muerte=(String)json.getString("muerte");
-                String profesion=(String)json.getString("profesion");
 
-              /*  autor.put("id",id);
-                autor.put("nombre",nombre);
-                autor.put("nacimiento",nacimiento);
-                autor.put("muerte",muerte);
-                autor.put("profesion",profesion);
-
-                autores.add(autor);*/
-
-                //Agregamos los autores al array que pasaremos al listView
                autores.add(new Autor(id,nombre,nacimiento,muerte, profesion));
 
 
@@ -146,63 +135,36 @@ public class ListadoAutoresActivity extends ListActivity implements Resultado {
         lista.setAdapter(adapter);
 
 
-/*
-        lista=getListView();
-        getListView().setVisibility(View.VISIBLE);
+        lista.setClickable(true);
 
-        lista.setAdapter(new ListaAutoresAdaptador(this,autores));*/
-
-     //   lista.setAdapter(new SimpleAdapter(this,autores,R.layout.datos_autor,new String[]{"id","nombre","nacimiento","muerte","profesion"},new int[]{R.id.autor_Id,R.id.textNombreAutor,R.id.textNacimiento,R.id.textMuerte,R.id.textProfesion} ));
-/*
-        lista.setOnClickListener(new View.OnClickListener() {
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               autor_Id = (TextView) view.findViewById(R.id.autor_Id);
+                String id_autor=autor_Id.getText().toString();
+                Intent i = new Intent(ListadoAutoresActivity.this, ListadoFrasesActivity.class);
+                i.putExtra("method", SoapMethod.GET_FRASES_BY_AUTOR);
+                i.putExtra("id_autor",Integer.parseInt(id_autor));
+                startActivity(i);
 
-                autor_Id=(TextView)view.findViewById(R.id.autor_Id);
-                String autorId=autor_Id.getText().toString();
-
-                Intent objIndent = new Intent(getApplicationContext(),DetalleAutor.class);
-                objIndent.putExtra("autor_Id",Integer.parseInt(autorId));
 
             }
-        });*/
+        });
+        /*
+       OnItemClickListener itemClickListener = new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent i = new Intent(ListadoAutoresActivity.this, ListadoFrasesActivity.class);
+                i.putExtra("method", SoapMethod.GET_FRASES_BY_AUTOR);
+                i.putExtra("id_autor",String.valueOf(position));
+                startActivity(i);
+            }
+        };
+        lista.setOnClickListener((View.OnClickListener) itemClickListener);
+        */
 
 
-
-
-
-
-
-
-
-
-/*
-       lista=(ListView)findViewById(R.id.listView);
-        if(autores.size()!=0) {
-            lista.setAdapter(new ListaAdaptador(this, R.layout.datos_autor, autores) {
-                @Override
-                public void onEntrada(Object entrada, View view) {
-
-
-                    TextView textViewAutor = (TextView) findViewById(R.id.textNombreAutor);
-                    TextView textViewNacimiento = (TextView) findViewById(R.id.textNacimiento);
-                    TextView textViewMuerte = (TextView) findViewById(R.id.textMuerte);
-                    TextView textViewProfesion = (TextView) findViewById(R.id.textProfesion);
-
-
-                }
-            });
-
-            lista.setOnClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                }
-
-            });
-
-
-        }*/
 
 
 

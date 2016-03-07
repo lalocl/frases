@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         */
 
-            final TextView textView = (TextView) findViewById(R.id.textNombre);
+            final TextView textView = (TextView) findViewById(R.id.textContenido);
 
             Button fraseDelDia = (Button) findViewById(R.id.button1);
             Button frasesPorAutor = (Button) findViewById(R.id.button2);

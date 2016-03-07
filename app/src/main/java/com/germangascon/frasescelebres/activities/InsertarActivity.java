@@ -105,6 +105,7 @@ public class InsertarActivity extends Activity  implements Resultado {
     }
     @Override
     public void onResult(String s) {
+        Log.d(TAG, s);
 
        // final TextView textView = (TextView) findViewById(R.id.textNombre);
         final   EditText nombre=(EditText)findViewById(R.id.editNombre);

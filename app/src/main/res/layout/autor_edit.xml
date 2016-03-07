@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre:"
-        android:id="@+id/textNombre"
+        android:id="@+id/textContenido"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Año de Nacimiento"
         android:id="@+id/textNacimiento"
-        android:layout_below="@+id/textNombre"
+        android:layout_below="@+id/textContenido"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="29dp" />
@@ -54,7 +54,7 @@
         android:ems="10"
         android:id="@+id/editNombre"
         android:layout_above="@+id/textNacimiento"
-        android:layout_toRightOf="@+id/textNombre"
+        android:layout_toRightOf="@+id/textContenido"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -65,7 +65,7 @@
         android:ems="10"
         android:id="@+id/editNacimiento"
         android:layout_above="@+id/textCategoria"
-        android:layout_toRightOf="@+id/textNombre"
+        android:layout_toRightOf="@+id/textContenido"
         android:layout_alignRight="@+id/editNombre"
         android:layout_alignEnd="@+id/editNombre" />
 

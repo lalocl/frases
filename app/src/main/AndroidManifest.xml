@@ -36,6 +36,10 @@
             android:name=".activities.ListadoAutoresActivity"
             android:label="ListaAutores">
         </activity>
+        <activity
+            android:name=".activities.ListadoFrasesActivity"
+            android:label="ListaFrases">
+        </activity>
 
     <activity android:name=".Setting.SettingsActivity">
     </activity>

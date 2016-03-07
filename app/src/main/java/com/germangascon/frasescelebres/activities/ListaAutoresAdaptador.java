@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class ListaAutoresAdaptador extends ArrayAdapter<Autor> {
 
+    private final static String TAG = "ListaAutoresAdaptador";
     private ArrayList<Autor> autores;
 
     public ListaAutoresAdaptador(Context context, ArrayList<Autor> autores) {
