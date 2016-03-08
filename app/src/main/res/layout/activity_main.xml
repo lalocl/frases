@@ -25,6 +25,7 @@
     <include layout="@layout/inicio"/>
     <include layout="@layout/pruebas_adm"/>
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -32,5 +33,12 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_menu_edit"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/noti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_alert"/>
 
 </android.support.design.widget.CoordinatorLayout>

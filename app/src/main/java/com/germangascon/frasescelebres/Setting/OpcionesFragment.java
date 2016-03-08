@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.germangascon.frasescelebres.R;
 
@@ -24,7 +25,21 @@ public class OpcionesFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.d(TAG, "Escucha de cambios");
-        if(key.equals("log")){
+
+        if(key.equals("hora")|| key.equals("min")){
+            Toast.makeText(null, "Momento Alarma", Toast.LENGTH_LONG).show();
+        }
+
+
+
+
+
+
+
+
+
+       /* if(key.equals("log")){
+
 
 
             Preference pref = findPreference(key);
@@ -48,7 +63,7 @@ public class OpcionesFragment extends PreferenceFragment implements SharedPrefer
                 }
 
             }
-        }
+        }*/
 
 
     }

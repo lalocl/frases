@@ -23,18 +23,18 @@ import com.germangascon.frasescelebres.soap.SoapMethod;
 /**
  * Created by usuario on 07/03/2016.
  */
-public class AlarmaService extends Service{
+public class AlarmaService extends Service {
     private final static String TAG = "AlarmaService";
     private static final int CUSTOM_NOTIFICATION = 1000;
     private Thread thread;
-    private final IBinder mBinder = new MyBinder();
+
 
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         Log.i(TAG, "onBind");
-        return mBinder;
+        return null;
     }
     @Override
     public boolean onUnbind(Intent intent) {
@@ -44,9 +44,13 @@ public class AlarmaService extends Service{
 
     @Override
     public void onCreate() {
+        super.onCreate();
         Log.i(TAG, "onCreate");
 
     }
+
+  //  @SuppressWarnings("static-access")
+    @Override
     public int onStartCommand(Intent intent,int flags,int startId){
 
         Log.i(TAG, "onStartCommand");
@@ -56,7 +60,7 @@ public class AlarmaService extends Service{
             public void run() {
 
 
-                /** Obtenemos el sonido de notificación por defecto */
+                // Obtenemos el sonido de notificación por defecto
                 Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(AlarmaService.this)
                         .setSmallIcon(android.R.drawable.stat_sys_warning)
@@ -64,21 +68,22 @@ public class AlarmaService extends Service{
                         .setContentTitle("Frase Célebre del día")
                         .setContentText("Nueva Notificación")
                                 //.setContentInfo("4")
-                                /** Establecemos el tono de notificación por defecto */
+                                // Establecemos el tono de notificación por defecto
                         .setSound(ringtoneUri)
-                                /**
-                                 * Actualmente existe un bug que hace que el ticker no se muestre correctamente
-                                 * Ver: https://code.google.com/p/android-developer-preview/issues/detail?id=60&colspec=ID%20Type%20Status%20Owner%20Summary
-                                 */
+                                //
+                                 // Actualmente existe un bug que hace que el ticker no se muestre correctamente
+                                 // Ver: https://code.google.com/p/android-developer-preview/issues/detail?id=60&colspec=ID%20Type%20Status%20Owner%20Summary
+                                 //
                         .setTicker("Nueva Frase!!")
-                                /** setAutoCancel permite indicar si la notificación será eliminada de la barra de estado al pulsar sobre ella */
+                                // setAutoCancel permite indicar si la notificación será eliminada de la barra de estado al pulsar sobre ella
                         .setAutoCancel(true);
 
-                Intent intent = new Intent(AlarmaService.this, ContenidoActivity.class);
-                intent.putExtra("texto", SoapMethod.GET_FRASE_DEL_DIA);
+                Intent intent = new Intent(AlarmaService.this, MainActivity.class);
+
+              //  intent.putExtra("texto", SoapMethod.GET_FRASE_DEL_DIA);
                 PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 mBuilder.setContentIntent(pendingIntent);
-                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+               NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(CUSTOM_NOTIFICATION, mBuilder.build());
             }
         });
@@ -90,6 +95,8 @@ public class AlarmaService extends Service{
 
 
     }
+
+
 
 
     public class MyBinder extends Binder {
