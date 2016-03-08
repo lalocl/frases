@@ -40,6 +40,10 @@
             android:name=".activities.ListadoFrasesActivity"
             android:label="ListaFrases">
         </activity>
+        <activity
+            android:name=".activities.AdministadorActivity"
+            android:label="ListaFrases">
+        </activity>
 
     <activity android:name=".Setting.SettingsActivity">
     </activity>

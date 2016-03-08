@@ -30,8 +30,7 @@ public class AdministadorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inicio);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -90,7 +89,7 @@ public class AdministadorActivity extends AppCompatActivity {
 
 
         });
-     
+
 
 
     }

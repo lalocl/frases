@@ -1,9 +1,13 @@
 package com.germangascon.frasescelebres;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +19,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.germangascon.frasescelebres.Services.NotificacionService;
 import com.germangascon.frasescelebres.Setting.SettingsActivity;
+import com.germangascon.frasescelebres.activities.AdministadorActivity;
 import com.germangascon.frasescelebres.activities.InsertarActivity;
 import com.germangascon.frasescelebres.soap.SoapMethod;
 import com.germangascon.frasescelebres.activities.ContenidoActivity;
 import com.germangascon.frasescelebres.activities.ListadoAutoresActivity;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,11 +45,32 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+      /*  int hora= prefs.getInt("hora",12);
+        int min=prefs.getInt("minuto",00);*/
+        String hora= prefs.getString("hora","12");
+        String min= prefs.getString("minuto","00");
+      //  Log.d(TAG, String.valueOf(hora) + ":" + String.valueOf(min));
+        Log.d(TAG, hora + ":" + min);
+
+        /*
+        Calendar cur__cal= new GregorianCalendar();
+        cur__cal.setTimeInMillis(System.currentTimeMillis());
+        Calendar cal= new GregorianCalendar();
+        cal.add(Calendar.DAY_OF_YEAR,cur__cal.get(Calendar.DAY_OF_YEAR));
+        cal.set(Calendar.HOUR_OF_DAY,hora);
+        cal.set(Calendar.MINUTE,min);*/
+        Calendar aviso= Calendar.getInstance();
+        aviso.set(Calendar.HOUR_OF_DAY,Integer.parseInt(hora));
+        aviso.set(Calendar.MINUTE,Integer.parseInt(min));
+
+
+        Intent i = new Intent(MainActivity.this, ContenidoActivity.class);
+        i.putExtra("method", SoapMethod.GET_FRASE_DEL_DIA);
+        PendingIntent pi= PendingIntent.getBroadcast(this,0,i,0);
+
+        AlarmManager am=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP,aviso.getTimeInMillis(),pi);
 
 
 
@@ -56,21 +86,19 @@ public class MainActivity extends AppCompatActivity {
                 if(tipoAcceso.equalsIgnoreCase("adm")&&(usu.equals("frase")&& pass.equals("frase"))) {
                     Snackbar.make(view, "Ole, puedes editar", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    Intent i = new Intent(MainActivity.this, AdministadorActivity.class);
+                    startActivity(i);
                 }else{
 
                     Snackbar.make(view, "Necesita permiso de administrador. Cambie la configuración en Settings", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
+
                 }
             }
         });
 
-        /*
 
-        if(tipoAcceso.equalsIgnoreCase("adm")) {
-        }else {
-
-        */
 
             final TextView textView = (TextView) findViewById(R.id.textContenido);
 
@@ -123,12 +151,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-      /*
-        }
-            */
+
 
 
        }
+
+
 
 
 
